@@ -278,6 +278,13 @@
     .fin__tel { min-height: 36px; }
   }
 </style>
+
+<style>
+.request{scroll-margin-top:100px;padding:clamp(48px,7vw,108px) var(--v-gutter,24px);background:#eef2f5;color:#141c24;border-top:1px solid #ccd5dd}
+.request__layout{max-width:1200px;margin:auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,6vw,80px);align-items:start}
+.request__layout>*{min-width:0}.request__eyebrow{font-size:15px;color:#1f5f9a;font-weight:600;margin:0 0 16px}.request h2{font:600 clamp(1.9rem,3.3vw,3.1rem)/1.12 var(--v-font-display);letter-spacing:-.025em;margin:0 0 22px;text-wrap:balance}.request__intro>p:not(.request__eyebrow){font-size:17px;line-height:1.6;max-width:44ch}.request__notice{margin-top:28px;padding:18px;background:#e1eaf2;border-radius:8px;font-size:15px!important}.request__form{padding:clamp(20px,3vw,36px);background:#fff;border-radius:12px;border:1px solid #ccd5dd}.request__fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.request__fields>div{min-width:0}.request label{display:block;font-size:16px;font-weight:600;margin-bottom:8px}.request input,.request select,.request textarea{display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;padding:14px 12px;border:1px solid #82919d;border-radius:6px;background:#fff;color:#141c24;font:400 16px/1.4 var(--v-font-text);min-height:52px}.request select{padding-right:28px}.request textarea{resize:vertical;min-height:110px}.request :is(input,select,textarea,button):focus-visible{outline:3px solid #1f5f9a;outline-offset:3px}.request [aria-invalid="true"]{border-color:#a3272e}.request__error{display:block;color:#a3272e;font-size:14px;line-height:1.4;margin-top:6px;overflow-wrap:anywhere}.request__error:empty{display:none}.request__wide{grid-column:1/-1}.request__optional,.request__required{font-weight:400;color:#55636f;font-size:14px}.request__required{margin:18px 0}.request button{cursor:pointer;max-width:100%;white-space:normal}.request__status{font-size:16px;line-height:1.6;overflow-wrap:anywhere;margin:18px 0 0}.request__status:empty{display:none}
+@media(max-width:760px){.request{scroll-margin-top:85px}.request__layout{grid-template-columns:minmax(0,1fr)}.request__fields{grid-template-columns:minmax(0,1fr)}.request__wide{grid-column:auto}.request button{width:100%}}
+</style>
 </head>
 <body>
 <div class="v-page">
@@ -290,7 +297,7 @@
       <span class="bar__line" aria-hidden="true"><b></b></span>
       <span class="bar__done">принято</span>
     </div>
-    <a class="v-btn" href="tel:+79000000000">Рассчитать уборку</a>
+    <a class="v-btn" href="#cleaning-request">Рассчитать уборку</a>
   </header>
 
   <main>
@@ -311,7 +318,7 @@
           <h1 class="v-display v-display--xl" data-v-kinetic="lines">Уборка квартир в Мытищах по списку из 36 пунктов</h1>
           <p class="v-lede">Кухня, санузел, комнаты и прихожая – что входит, по пунктам ниже. Принимаете по ним же. Цена по метражу до приезда.</p>
           <div class="hero__cta">
-            <a class="v-btn" href="tel:+79000000000">Рассчитать уборку</a>
+            <a class="v-btn" href="#cleaning-request">Рассчитать уборку</a>
             <p class="hero__hint">Назовите метраж и тип уборки – вернёмся с ценой и датой.</p>
           </div>
         </div>
@@ -494,7 +501,7 @@
             <p class="example__text v-nums">Квартира 60 м², генеральная: от 13&nbsp;200 ₽.</p>
             <p class="example__note">Окна снаружи, химчистка мягкой мебели и ковров, уборка после пожара или затопления – считаем отдельно, по запросу.</p>
           </div>
-          <a class="v-btn v-btn--ghost" href="tel:+79000000000">Рассчитать уборку</a>
+          <a class="v-btn v-btn--ghost" href="#cleaning-request">Рассчитать уборку</a>
         </div>
         <ul class="rows rows--ceny" data-v-in data-v-stagger="70">
           <li><span class="rows__col">П</span><h3>Поддерживающая</h3><p>Раз в неделю или две: открытые поверхности, сантехника, полы, мусор. Пункты акта с отметкой «П».</p><span class="price v-nums">140 ₽ за м²</span><span class="min v-nums">от 3&nbsp;500 ₽ за квартиру</span></li>
@@ -552,6 +559,30 @@
       </div>
     </section>
 
+
+    <section class="request" id="cleaning-request" aria-labelledby="request-title">
+      <div class="request__layout">
+        <div class="request__intro">
+          <p class="request__eyebrow">Расчёт уборки</p>
+          <h2 id="request-title">Расскажите, какая уборка нужна</h2>
+          <p>Укажите площадь и вид уборки, чтобы подготовить заявку на расчёт.</p>
+          <p class="request__notice" id="request-demo">Это демо формы: данные никуда не отправляются и не сохраняются. Для проверки используйте вымышленные имя и номер. Приём заявок подключим к выбранному каналу связи.</p>
+        </div>
+        <form id="cleaning-form" class="request__form" novalidate onsubmit="return false" aria-describedby="request-demo">
+          <div class="request__fields">
+            <div><label for="request-name">Ваше имя <span aria-hidden="true">*</span></label><input id="request-name" autocomplete="off" required minlength="2" maxlength="70" placeholder="Как к вам обращаться" aria-describedby="request-name-error"><span class="request__error" id="request-name-error"></span></div>
+            <div><label for="request-phone">Телефон <span aria-hidden="true">*</span></label><input id="request-phone" type="tel" inputmode="tel" autocomplete="off" required maxlength="25" placeholder="+7 (___) ___-__-__" aria-describedby="request-phone-error"><span class="request__error" id="request-phone-error"></span></div>
+            <div><label for="request-area">Площадь, м² <span aria-hidden="true">*</span></label><input id="request-area" type="number" inputmode="decimal" min="1" max="10000" step="0.1" required placeholder="Например, 60" aria-describedby="request-area-error"><span class="request__error" id="request-area-error"></span></div>
+            <div><label for="request-type">Вид уборки <span aria-hidden="true">*</span></label><select id="request-type" required aria-describedby="request-type-error"><option value="">Выберите вариант</option><option>Поддерживающая</option><option>Генеральная</option><option>После ремонта</option><option>Нужна консультация</option></select><span class="request__error" id="request-type-error"></span></div>
+            <div class="request__wide"><label for="request-comment">Комментарий <span class="request__optional">– необязательно</span></label><textarea id="request-comment" rows="3" maxlength="1000" placeholder="Удобный день, особенности квартиры или дополнительные работы"></textarea></div>
+          </div>
+          <p class="request__required">* Обязательные поля</p>
+          <button class="v-btn" type="submit">Проверить заявку</button>
+          <p class="request__status" id="request-status" role="status" aria-live="polite" tabindex="-1"></p>
+        </form>
+      </div>
+    </section>
+
     <!-- 7 · ДЕЙСТВИЕ: акт принят, расчёт. Реплика держится, футер внутри сцены -->
     <section class="fin" id="raschet" data-v-act="pin" data-v-span="1.5" aria-label="Рассчитать уборку">
       <div data-v-stage>
@@ -560,7 +591,7 @@
             <p class="fin__stamp"><i class="tick" aria-hidden="true"></i>Акт приёмки · <b><span data-total>36</span> из <span data-total>36</span></b> · принято</p>
             <h2 class="v-display">Назовите метраж – вернёмся с ценой и датой</h2>
             <p class="v-lede">Назовите площадь, вид уборки и удобный день. Ответим суммой по метражу и свободным временем в рабочие часы.</p>
-            <a class="v-btn" href="tel:+79000000000">Рассчитать уборку</a>
+            <a class="v-btn" href="#cleaning-request">Рассчитать уборку</a>
           </div>
           <div class="fin__meta" data-v-cue="0.1">
             <a class="fin__tel" href="tel:+79000000000">+7 (900) 000-00-00</a>
@@ -641,6 +672,18 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     measure();
   })();
+</script>
+
+<script>
+(function(){
+  const form=document.getElementById('cleaning-form');
+  const ids=['request-name','request-phone','request-area','request-type'];
+  const status=document.getElementById('request-status');
+  function message(id){const el=document.getElementById(id),v=el.value.trim();if(id==='request-name'&&v.length<2)return 'Укажите имя: минимум 2 символа.';if(id==='request-phone'){const n=v.replace(/\D/g,'');if(n.length<10||n.length>15||!/^[+0-9 ()-]+$/.test(v))return 'Укажите телефон: от 10 до 15 цифр.';}if(id==='request-area'&&(!v||!Number.isFinite(Number(v))||Number(v)<1||Number(v)>10000))return 'Укажите площадь от 1 до 10 000 м².';if(id==='request-type'&&!v)return 'Выберите вид уборки.';return '';}
+  function validate(id){const el=document.getElementById(id),error=message(id);document.getElementById(id+'-error').textContent=error;el.setAttribute('aria-invalid',String(Boolean(error)));return !error;}
+  form.addEventListener('submit',function(event){event.preventDefault();status.textContent='';const bad=ids.filter(id=>!validate(id));if(bad.length){status.textContent='Проверьте отмеченные поля.';document.getElementById(bad[0]).focus();return;}status.textContent='Заявка заполнена корректно. Это демонстрация: данные не отправлены и не сохранены. В готовом сайте здесь будет подтверждение отправки после ответа сервера.';status.focus();});
+  ids.forEach(id=>document.getElementById(id).addEventListener('input',function(){status.textContent='';if(this.getAttribute('aria-invalid')==='true')validate(id);}));
+})();
 </script>
 </body>
 </html>
